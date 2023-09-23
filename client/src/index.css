@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base{
+body {
+    font-family: 'Roboto', sans-serif;
+background: #F2F8F7;
+    min-height: 100vh;
+  }
+}
+
+
