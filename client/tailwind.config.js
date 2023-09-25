@@ -11,7 +11,7 @@ module.exports = {
         'text-xl': '#222222',
         'green-border': '#94D7D3', 
         'nav-title': '#333',
-        'placeholder': '#999999'
+        'gray-light': '#999999'
       
 
       },

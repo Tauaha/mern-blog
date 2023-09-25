@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, login, getMe } from "../controllers/auth.js";
+import { register, login, current } from "../controllers/auth.js";
 import { checkAuth } from "../utils/checkAuth.js";
 
 const router = new Router()
@@ -8,7 +8,7 @@ router.post('/register', register)
 
 router.post('/login', login)
 
-router.post('/getMe', checkAuth, getMe)
+router.post('/current', checkAuth, current)
 
 
 export default router

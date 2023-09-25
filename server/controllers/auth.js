@@ -7,7 +7,7 @@ export const register = async (req, res) => {
         const { username, password } = req.body 
         const isUsed = await User.findOne({ username} )
         if (isUsed) {
-            return  res.status(402).json({message: 'User`s name in use'})
+            return  res.json({message: 'User`s name in use'})
         }
 
         const salt = bcrypt.genSaltSync(10)
@@ -17,9 +17,13 @@ export const register = async (req, res) => {
             username,
             password: hash
         })
+          const token = jwt.sign({
+            id: newUser._id
+        }, process.env.JWT_SECRET, { expiresIn: '30d' })
         await newUser.save()
         res.json({
             newUser,
+            token,
             message: 'Register successful'
         })
     } catch (error) {
@@ -55,7 +59,7 @@ export const login = async (req, res) => {
     }
 }
 
-export const getMe = async (req, res) => {
+export const current = async (req, res) => {
     try {
         const user = await User.findById(req.userId)
             if (!user) {

@@ -1,8 +1,19 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
+import { checkIsAuth, logout } from '../redux/features/auth/authSlice'
+import { toast } from 'react-toastify'
+
 const Navbar = () => {
 
-  const isAuth = false
+  const isAuth = useSelector(checkIsAuth)
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    window.localStorage.removeItem('token')
+    toast()
+  }
   const activePage = {
     color: '#00AAA1'
   }
@@ -29,10 +40,10 @@ const Navbar = () => {
     )}
       <div className='flex justify-center items-center bg-green-blue text-xs text-white rouded-sm px-4 py-2'>
         {isAuth ? (
-           <button>
+           <button onClick={handleLogout}>
 Log Out
       </button>
-     ): (<Link to={'./login'}>   <button>
+     ): (<Link to={'/login'}>   <button>
 Log In
       </button></Link>)}
       </div>
